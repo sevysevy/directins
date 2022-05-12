@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Add functionality of total discount in invoice form  --> 
+    <record id="view_move_form_line" model="ir.ui.view">
+        <field name="name">account.move.form</field>
+        <field name="model">account.move</field>
+        <field name="inherit_id" ref ="account.view_move_form"/>  
+        <field name="arch" type="xml">
+            <xpath expr ="//field[@name='invoice_line_ids']/ tree /field[@ name= 'quantity']" position="replace">
+                <field name ="start_date" required="1"/> 
+                <field name ="end_date" required="1"/>       
+            </xpath>
+
+            <xpath expr ="//field[@name='invoice_line_ids']/ tree /field[@ name= 'product_id']" position="replace">
+                <field name="product_id" invisible="1"/>      
+            </xpath>
+
+            <xpath expr ="//field[@name='invoice_line_ids']/ tree /field[@ name= 'name']" position="replace">
+                <field name="product_id" string="Type d'assurance"/>
+                <field name ="name" invisible="1" />
+                <field name ="police" />  
+                <field name ="risque" />     
+            </xpath>
+
+            <xpath expr ="//field[@name='invoice_line_ids']/ tree /field[@ name= 'price_unit']" position="replace">
+                
+                <field name ="price_unit" invisible="1"/>     
+            </xpath>
+
+            <xpath expr ="//field[@name='invoice_line_ids']/ tree /field[@ name= 'price_unit']" position="after">
+                <field name="prime_net" />
+                <field name ="accessoire" string="Accessoires"/>  
+                <field name ="dta" string="DTA"/>  
+                <field name ="autres" string="Autres"/>       
+            </xpath>
+
+            <xpath expr ="//field[@name='invoice_line_ids']/ tree /field[@ name= 'price_subtotal']" position="replace">
+                
+                <field name ="price_subtotal" string="Prime HT" force_save="1"/>     
+            </xpath>
+
+
+            <xpath expr ="//field[@name='invoice_line_ids']/ tree /field[@ name= 'product_uom_id']" position="replace">
+                
+                <field name ="product_uom_id" invisible="1"/>     
+            </xpath>
+
+            <xpath expr = "//field[@name='line_ids'] / tree / field [@ name = 'account_id']" position = "before" > 
+                <field name ="start_date" invisible="1"/> 
+                <field name ="end_date"  invisible="1"/> 
+                <field name ="police"  invisible="1"/>   
+                <field name ="risque" invisible="1"/>   
+                <field name ="accessoire" invisible="1"/>    
+                <field name ="dta" invisible="1"/>  
+                <field name ="autres" invisible="1"/>  
+
+                <field name ="prime_net" invisible="1"/>       
+            </xpath>
+
+        </field> 
+    </record>
+</odoo>

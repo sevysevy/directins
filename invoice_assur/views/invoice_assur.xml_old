@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+
+    <record id="view_move_form_assured" model="ir.ui.view">
+        <field name="name">account.move.form</field>
+        <field name="model">account.move</field>
+        <field name="inherit_id" ref ="account.view_move_form"/>  
+        <field name="arch" type="xml">
+            <xpath expr ="//field[@name='partner_id']" position="after">
+                <field name="num_compte" invisible="1"/>
+                <field name="assured"/>
+                
+                
+            </xpath>
+            <xpath expr ="//field[@name='payment_reference']" position="replace">
+                <field name="date_assur_end" readonly="1" invisible="1"/>
+            </xpath>
+            <xpath expr ="//field[@name='partner_id']" position="replace">
+                <field name="partner_id" string="Souscripteur"/>
+                
+            </xpath>
+            <xpath expr ="//group[@id='header_right_group']" position="after">
+                <group id="right_group">
+                    <div class="o_td_label">
+                        <label for="car_brand"  style="font-weight:bold;" />
+                    </div>
+                    <field name="car_brand" nolabel="1" />
+
+                    <div class="o_td_label">
+                        <label for="car_immatriculation"  style="font-weight:bold;" />
+                    </div>
+                    <field name="car_immatriculation" nolabel="1" />
+                    
+                    <div class="o_td_label">
+                        <label for="car_place_number"  style="font-weight:bold;" />
+                    </div>
+                    <field name="car_place_number" nolabel="1" />
+                    
+
+                    <div class="o_td_label">
+                        <label for="car_usage"  style="font-weight:bold;" />
+                    </div>
+                    <field name="car_usage" nolabel="1" />
+
+                </group>
+                <group id="left_group">
+
+                    <div class="o_td_label">
+                        <label for="car_energie"  style="font-weight:bold;" />
+                    </div>
+                    <field name="car_energie" nolabel="1" />
+
+                    <div class="o_td_label">
+                        <label for="car_power"  style="font-weight:bold;" />
+                    </div>
+                    <field name="car_power" nolabel="1" />
+
+                    <div class="o_td_label">
+                        <label for="car_category"  style="font-weight:bold;" />
+                    </div>
+                    <field name="car_category" nolabel="1" />
+
+                </group>
+            </xpath>
+        </field> 
+    </record>
+
+
+
+    
+
+</odoo>

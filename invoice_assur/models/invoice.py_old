@@ -1,0 +1,30 @@
+# -*- coding: utf-8 -*-
+
+from odoo import api,fields,models,_
+from odoo.tools.misc import formatLang, get_lang
+from datetime import date
+
+
+class InvoiceAssur(models.Model):
+    _inherit = 'account.move'
+
+
+    @api.depends('partner_id')
+    def _compute_num_compte(self):
+        self.num_compte =  self.partner_id.num_compte
+
+    ref_dossier             = fields.Char(string = "Numéro de reférence du dossier")
+    assured                 = fields.Many2one("res.partner" ,string='Assuré')
+    num_compte              = fields.Char(string='Numéro de compte' , compute= _compute_num_compte)
+    invoice_date            = fields.Date(string='Date de facturation' , default=fields.Date.context_today)
+    date_assur_end          = fields.Date(related="invoice_line_ids.end_date" , string="Echeance de l'assurance")
+
+    car_power               = fields.Integer(string="Puissance du vehicule")
+    car_energie             = fields.Selection([('ess','Essence'),('gas','Gasoil')], 
+        string="Energie", default="ess")
+    car_brand               = fields.Char(string="Marque du vehicule")
+    car_immatriculation     = fields.Char(string="Immatriculation du vehicule")
+    car_category            = fields.Char(string="Categorie ")
+    car_place_number        = fields.Integer(string="Nombre de place")
+    car_usage               = fields.Char(string="Utilisation du vehicule")
+
